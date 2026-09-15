@@ -13,28 +13,34 @@ class Tarefas:
         return tarefa_adicionada
 
 
-    def remover_tarefas(self, indice):
-        if 0 <= indice < len(self.tarefas):
-            self.tarefas.pop(indice)
+    def remover_tarefa(self, indice):
+        if not (0 <= indice < len(self.tarefas)):
+            mensagem = (
+            f'indice inválido: {indice}. '
+            f'Existem {len(self.tarefas)} tarefa(s).'
+        )
+            raise IndexError(mensagem)
+        self.tarefas.pop(indice)
+
 
 
     def concluir_tarefa(self, indice):
-        if 0 <= indice < len(self.tarefas):
-            tarefa = self.tarefas.pop(indice)
-            self.tarefas_concluidas.append(tarefa)
-            return tarefa
-        return None
-    
+        if not (0 <= indice < len(self.tarefas)):
+            mensagem = (
+            f'indice inválido: {indice}. '
+            f'Existem {len(self.tarefas)} tarefa(s).'
+        )
+            raise IndexError(mensagem)
+        tarefa = self.tarefas.pop(indice)
+        self.tarefas_concluidas.append(tarefa)
+        return tarefa
+
 
     def listar_tarefas(self):
         return self.tarefas
 
 
-
-tf1 = Tarefas()
-tf1.adicionar_tarefa('estudar', 'tomar banho', 'arrumar para o trabalho')
-
-tf1.remover_tarefas(0)
+    def listar_tarefas_concluidas(self):
+        return self.tarefas_concluidas
 
 
-print(tf1.listar_tarefas())
